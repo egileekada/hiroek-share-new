@@ -1,10 +1,8 @@
 import { IParnter } from "@/model/user";
 import { NextRequest, NextResponse } from "next/server"; 
 
-interface BackendResponse {
-  data : {
-    eventPartner: IParnter;
-  }
+interface BackendResponse { 
+    eventPartner: IParnter; 
 }
 
 export async function GET(
@@ -32,7 +30,7 @@ export async function GET(
     }
 
     const json: BackendResponse = await res.json();
-    const item = json.data?.eventPartner;
+    const item = json.eventPartner;
 
     if (!item) {
       console.error("Challenge not found for id:", id);
