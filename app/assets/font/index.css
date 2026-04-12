@@ -1,0 +1,144 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'Inter';
+    src: url("/font/Inter.ttf");
+}
+
+@font-face {
+  font-family: 'Axiforma-Thin';
+  src: url("./assets/font/.ttf");
+} 
+
+@font-face {
+  font-family: 'Axiforma-Light';
+  src: url("./assets/font/fonnts.com-Axiforma_Light.ttf");
+}
+
+@font-face {
+  font-family: 'Axiforma-Medium';
+  src: url("./assets/font/fonnts.com-Axiforma_Medium.ttf");
+}
+
+@font-face {
+  font-family: 'Axiforma-Regular';
+  src: url("./assets/font/fonnts.com-Axiforma_Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Axiforma-Black';
+  src: url("./assets/font/fonnts.com-Axiforma-Black.ttf");
+}
+
+@font-face {
+  font-family: 'Axiforma-Heavy';
+  src: url("./assets/font/fonnts.com-Axiforma-Heavy.ttf");
+} 
+
+
+html,
+body {
+    overflow-x: hidden !important;
+    font-family: "Raleway", serif !important;
+    scroll-behavior: smooth;
+}
+/* 
+.inter-all {
+    font-family: "Inter";
+    font-weight: 800;
+    font-style: normal;
+}
+
+.font-bold{
+  font-family: "Axiforma-Black" !important;
+  font-weight: 700;
+}
+
+.font-semibold{
+  font-family: "Axiforma-Medium" !important;
+  font-weight: 600;
+}
+
+.font-meduim{
+  font-family: "Axiforma-Medium" !important;
+  font-weight: 500;
+}
+
+.font-regular{
+  font-family: "Axiforma-Regular" !important;
+  font-weight: 400;
+}
+
+.font-black{
+  font-family: "Axiforma-Black" !important;
+  font-weight: 900;
+} */
+
+.pincode-input-container {
+    .pincode-input-text {
+        padding: 0 !important;
+        margin: 0 2px;
+        text-align: center;
+        border-radius: 6px;
+        border: 0px solid transparent;
+        background: transparent;
+        color: #37137F;
+        width: 120px;
+        height: 60px;
+    }
+
+    .pincode-input-text:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.DialogOverlay {
+    /* background-color: var(--black-a9); */
+    position: fixed;
+    inset: 0;
+    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 20 !important;
+  }
+  
+  .DialogContent {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw; 
+    max-height: 85vh;
+    z-index: 30 !important;
+    padding: 10px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .DialogContent:focus {
+    outline: none;
+  }
+  
+  .DialogTitle {
+    margin: 0;
+    font-weight: 500;
+    /* color: var(--mauve-12); */
+    font-size: 17px;
+  }
+  
+  .DialogDescription {
+    margin: 10px 0 40px;
+    /* color: var(--mauve-11); */
+    font-size: 15px;
+    line-height: 1.5;
+  }  
+
+  .date-picker-input {
+    width: 100% !important
+  }
