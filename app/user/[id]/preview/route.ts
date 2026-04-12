@@ -64,7 +64,7 @@ export async function GET(
 
           <meta http-equiv="refresh" content="0; url='/user/${id}'">
         </head>
-        <body>Redirecting…</body>
+        <body>Redirecting</body>
       </html>
     `;
 

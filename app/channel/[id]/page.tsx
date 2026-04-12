@@ -20,11 +20,7 @@ export default function ChannelsPage() {
     // const { joinChannel, open, setOpen, tab, setTab, setShow, show } =
     //     useAuth();
 
-    const isMember = item?.members?.some((m) => m?._id === user?._id);
-
-    const handleJoin = () => {
-        // if (item?._id) joinChannel?.mutate(item._id);
-    };
+    const isMember = item?.members?.some((m) => m?._id === user?._id); 
 
     const handleViewApp = () => {
         setOpen(true);
