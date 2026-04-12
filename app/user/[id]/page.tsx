@@ -86,7 +86,7 @@ export default function UserId() {
                                 About Us
                             </div>
 
-                            <p className="text-left">
+                            <p className="text-left font-medium ">
                                 {textLimit(data?.bio ?? "", 150)}
                                 {data?.bio && data.bio.length > 150 && (
                                     <span
@@ -123,7 +123,7 @@ export default function UserId() {
                     open={showBio}
                     setOpen={setShowBio}
                 >
-                    <div className="h-[80vh] overflow-y-auto px-4 py-4">
+                    <div className="h-[80vh] overflow-y-auto py-4">
                         <div className="mx-auto mb-4 w-fit px-4 py-1 bg-[#37137F] text-white rounded-3xl font-bold">
                             About Us
                         </div>
@@ -146,7 +146,7 @@ export default function UserId() {
                     open={showModal}
                     setOpen={setShowModal}
                 >
-                    <div className="h-[80vh] flex flex-col gap-4 p-4">
+                    <div className="h-[80vh] flex flex-col gap-4 py-4">
                         <div className="mx-auto bg-[#B00062] text-white px-4 py-2 rounded-lg font-bold text-sm">
                             Event Schedules
                         </div>
