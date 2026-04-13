@@ -20,6 +20,8 @@ import CustomImage from "@/components/shared/customImage";
 import CustomButton from "@/components/shared/customButton";
 import { textLimit } from "@/utils/textlimit";
 import { capitalizeFLetter } from "@/utils/capitalLetter";
+import { LabelText } from "@/components/shared"; 
+import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 
 function SharePage() {
     const { isLoading, data: event } = useGetEventData();
@@ -123,18 +125,46 @@ function SharePage() {
                     {/* Description */}
                     <EventDescription description={event?.description ?? ""} />
 
-                    {/* {event?.eventPledge?.organizations.length > 0 && (
-                                <div className=" flex w-full gap-3 items-center justify-center " >
-                                    <div className=" flex flex-col gap-2 items-center " >
-                                        <div className=" w-fit bg-[#37137F26] rounded-md px-[10px] h-[25px] flex justify-center items-center "  >
-                                            <Text className=" font-bold text-sm " >Charity Partner(s)</Text>
-                                        </div>
-                                        <CustomButton onClick={() => setShowPartner(true)} hasIcon icon={<IoMdEye size={"20px"} />} rounded="44px" width="100%" height="50px"  >
-                                            View Charity Partner(s)
-                                        </CustomButton>
+                    {event?.eventPledge?.organizations &&
+                        Array.isArray(event.eventPledge.organizations) &&
+                        event.eventPledge.organizations.length > 0 && (
+                            <div className=" w-full px-4 ">
+                                <div
+                                    style={{
+                                        boxShadow: "0px 0px 4px 0px #00000040",
+                                    }}
+                                    className="lg:max-w-[500px] lg:mx-auto rounded-[20px] py-4 px-6 flex w-full items-center justify-center"
+                                >
+                                    <div className="flex flex-col gap-4 items-center">
+                                        <LabelText>
+                                            Please Make A Donation
+                                        </LabelText>
+                                        <p className="font-semibold text-sm">
+                                            When You Join The Event, you Will
+                                            Also Have The Chance To Support Our
+                                            Chosen Charity Partner{" "}
+                                            {event?.eventPledge
+                                                ?.organizations &&
+                                            Array.isArray(
+                                                event.eventPledge.organizations,
+                                            ) &&
+                                            event.eventPledge.organizations
+                                                .length > 0
+                                                ? typeof event.eventPledge
+                                                      .organizations[0] ===
+                                                  "string"
+                                                    ? event.eventPledge
+                                                          .organizations[0]
+                                                    : (event.eventPledge
+                                                          .organizations[0]
+                                                          ?.name ?? "")
+                                                : ""}{" "}
+                                            With A Donation.
+                                        </p>
                                     </div>
                                 </div>
-                            )} */}
+                            </div>
+                        )}
 
                     {/* Map */}
                     {event?.address && (
@@ -155,9 +185,10 @@ function SharePage() {
 
             {/* Bottom CTA */}
             <BottomCTA
-                event={event}
+                event={event as IEvent}
                 onJoin={() => setOpenTicket(true)}
                 onDonate={() => setOpenDonate(true)}
+                setShowHost={() => setShowHost(true)}
             />
 
             {/* Modals */}
@@ -215,7 +246,7 @@ function SharePage() {
                 setOpen={setShowHost}
             >
                 <div className=" pb-3 px-4 flex flex-col gap-4 ">
-                    <div className=" w-full flex items-center justify-center gap-3 px-2 bg-[#37137F4D] bg-opacity-30 rounded-[10px] py-3 ">
+                    <div className=" w-full flex items-center gap-3 px-2 bg-[#A73A7A66] bg-opacity-30 rounded-[20px] py-3 ">
                         <div
                             onClick={() => handleShowType("host")}
                             className=" w-[44px] h-[44px] rounded-full "
@@ -230,15 +261,18 @@ function SharePage() {
                                 alt="image"
                             />
                         </div>
-                        <div className=" flex flex-col gap-1 ">
-                            <div className=" font-bold text-[12px] flex justify-center items-center text-white bg-[#37137FBF] rounded h-[20px] w-[80px] ">
+                        <div className=" flex flex-col ">
+                            <div className=" font-bold text-[12px] flex justify-center items-center text-white bg-[#37137F] rounded h-[20px] w-[85px] ">
                                 Event Host:
                             </div>
-                            <p className=" font-bold text-[14px] text-center text-[#37137F] ">
+                            <p className=" font-semibold text-[14px] text-center text-[#37137F] ">
                                 {event?.admin?.fullname ?? event?.admin?.name}
                             </p>
                         </div>
                     </div>
+                    <CustomButton hasFrontIcon icon={<HiChatBubbleBottomCenterText />} height="40px" rounded="999px">
+                        Message Event Host
+                    </CustomButton>
                     <div
                         onClick={() => setShowHost(false)}
                         role="button"

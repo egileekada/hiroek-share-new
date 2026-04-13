@@ -59,7 +59,7 @@ export default function TicketSelectionTab({
                                 </p>
                             </div>
 
-                            {/* {isUnavailable ? (
+                            {isUnavailable ? (
                                 <div className="w-[116px] h-[54px] text-primary px-2 flex justify-between items-center rounded-lg">
                                     <p className="text-xs font-semibold text-center">
                                         {!salesStarted
@@ -71,7 +71,7 @@ export default function TicketSelectionTab({
                                             : "Ticket Sold Out"}
                                     </p>
                                 </div>
-                            ) : hasNoLimit ? ( */}
+                            ) : hasNoLimit ? (
                                 <div className="w-[116px] h-[54px] text-primary border-2 px-2 border-[#37137F4D] flex justify-between items-center rounded-lg">
                                     <button role="button" onClick={() => updateTicket(item._id, "remove")}>
                                         <AiOutlineMinusCircle size="30px" />
@@ -81,7 +81,7 @@ export default function TicketSelectionTab({
                                         <IoMdAddCircleOutline size="30px" />
                                     </button>
                                 </div>
-                            {/* ) : (
+                            ) : (
                                 <div className="w-[116px] h-[54px] text-primary border-2 px-2 border-[#37137F4D] flex justify-between items-center rounded-lg">
                                     <button role="button" onClick={() => updateTicket(item._id, "remove")}>
                                         <AiOutlineMinusCircle size="30px" />
@@ -95,7 +95,7 @@ export default function TicketSelectionTab({
                                         <IoMdAddCircleOutline size="30px" />
                                     </button>
                                 </div>
-                            )} */}
+                            )}
                         </div>
                     );
                 })}

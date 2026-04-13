@@ -40,6 +40,35 @@ export const useUserData = () => {
   return query;
 };
 
+
+/**
+ * ===============================
+ * 1. GET USER DATA (BY PARAM ID)
+ * ===============================
+ */
+export const useEventByUserId = () => {
+  const { id } = useParams();
+  const userId = localStorage.getItem("userId");
+
+  const query = useQuery({
+    queryKey: ["userticket", id],
+    queryFn: async () => {
+      const res = await httpService.get(`/events/user-event-ticket/${id}/${userId}`);
+      return res
+    },
+    enabled: !!id,
+  });
+
+  useEffect(() => {
+    if (query.error) {
+      const err: any = query.error;
+      toast.danger(err?.response?.data);
+    }
+  }, [query.error]);
+
+  return query;
+};
+
 /**
  * ===============================
  * 2. GET CURRENT USER

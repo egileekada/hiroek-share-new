@@ -28,7 +28,7 @@ export default function ModalLayout({
     return (
         <Modal isOpen={open} onOpenChange={setOpen}>
             <Modal.Backdrop>
-                <Modal.Container className=" p-0! m-0! " >
+                <Modal.Container className=" p-0! m-0! w-full! " >
                     <Modal.Dialog
                         className="bg-white relative"
                         // style={{
@@ -51,8 +51,10 @@ export default function ModalLayout({
                             </Modal.Header>
                         )}
 
-                        <Modal.Body className=" px-1 " >
+                        <Modal.Body >
+                            <div className=" w-full overflow-x-hidden " >
                             {children}
+                            </div>
                         </Modal.Body>
                     </Modal.Dialog>
                 </Modal.Container>

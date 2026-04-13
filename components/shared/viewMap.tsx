@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import LabelText from "./labelText";
 
 interface LatLngLiteral {
     lat: number;
@@ -57,7 +58,10 @@ export default function ViewMap({ lat, lng }: ViewMapProps) {
     if (!isLoaded) return <div>Loading maps...</div>;
 
     return (
-        <GoogleMap
+        <div className=" w-full flex flex-col gap-3 items-center " >
+            <LabelText>Location Map</LabelText>
+
+<GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={16}
             center={location}
@@ -66,5 +70,6 @@ export default function ViewMap({ lat, lng }: ViewMapProps) {
         >
             <Marker position={location} />
         </GoogleMap>
+        </div>
     );
 }

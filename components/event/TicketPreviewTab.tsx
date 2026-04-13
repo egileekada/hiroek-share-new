@@ -29,8 +29,8 @@ export default function TicketPreviewTab({
 }) {
     return (
         <div className="w-full flex flex-col gap-4 text-pr items-center">
-            <div className="pb-2 w-full flex gap-2 justify-center border-b border-[#E8E8E8]">
-                <button onClick={() => setTab(2)}>
+            <div className="pb-2 w-full flex gap-2 justify-center items-center relative border-b border-[#E8E8E8]">
+                <button className=" absolute left-0 " onClick={() => setTab(2)}>
                     <IoChevronBack size="20px" />
                 </button>
                 <p className="text-xl font-black text-primary">Ticket Purchase Preview</p>

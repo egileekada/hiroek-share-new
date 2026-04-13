@@ -16,7 +16,7 @@ export default function EventHeader({ event, totalTickets }: any) {
 
     return (
         <div className="w-full p-4 bg-white rounded-xl font-medium shadow flex flex-col gap-2">
-            <p className="font-bold text-lg text-primary">{event?.name}</p>
+            <p className="font-bold text-lg text-primary capitalize ">{event?.name}</p>
 
             <div className="flex gap-2 items-center mt-2 ">
                 <LocationIcon block={true} />
