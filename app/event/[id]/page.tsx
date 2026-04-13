@@ -20,13 +20,15 @@ import CustomImage from "@/components/shared/customImage";
 import CustomButton from "@/components/shared/customButton";
 import { textLimit } from "@/utils/textlimit";
 import { capitalizeFLetter } from "@/utils/capitalLetter";
-import { LabelText } from "@/components/shared"; 
+import { LabelText } from "@/components/shared";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
 
 function SharePage() {
     const { isLoading, data: event } = useGetEventData();
     const { data: currencyData } = useCurrencyData();
 
+    const router = useRouter();
     console.log(event);
 
     const [openDonate, setOpenDonate] = useState(false);
@@ -180,6 +182,21 @@ function SharePage() {
 
                     {/* Fundraising */}
                     <FundraisingSection event={event} />
+
+                    <div className=" w-full flex mt-4 items-center justify-between ">
+                        <button
+                            onClick={() => setShowHost(true)}
+                            className=" text-sm font-black text-[#B00062] "
+                        >
+                            Message Event Host
+                        </button>
+                        <button
+                            onClick={() => router.push(`/policy/${event?._id}`)}
+                            className=" text-sm font-medium text-primary "
+                        >
+                            policy
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -270,7 +287,12 @@ function SharePage() {
                             </p>
                         </div>
                     </div>
-                    <CustomButton hasFrontIcon icon={<HiChatBubbleBottomCenterText />} height="40px" rounded="999px">
+                    <CustomButton
+                        hasFrontIcon
+                        icon={<HiChatBubbleBottomCenterText />}
+                        height="40px"
+                        rounded="999px"
+                    >
                         Message Event Host
                     </CustomButton>
                     <div

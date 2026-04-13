@@ -33,7 +33,7 @@ export default function EventHeader({ event, totalTickets }: any) {
             </div>
 
             {event?.ticketing?.length > 0 && (
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col gap-2 ">
                     <div className="flex gap-2 items-center">
                         <TicketIcon />
                         <p className="text-sm font-semibold">
