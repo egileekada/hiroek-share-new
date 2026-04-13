@@ -183,7 +183,7 @@ function SharePage() {
                     {/* Fundraising */}
                     <FundraisingSection event={event} />
 
-                    <div className=" w-full flex mt-4 items-center justify-between ">
+                    <div className=" w-full flex lg:px-4 mt-4 items-center justify-between ">
                         <button
                             onClick={() => setShowHost(true)}
                             className=" text-sm font-black text-[#B00062] "

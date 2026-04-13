@@ -47,7 +47,7 @@ export default function TicketSelectionTab({
                     return (
                         <div key={index} className="w-full border rounded-xl flex items-center justify-between gap-4 p-4">
                             <div className="flex flex-col">
-                                <p className="text-xs font-semibold text-primary">{item?.ticketType}</p>
+                                <p className="text-xs font-semibold text-primary capitalize ">{item?.ticketType}</p>
                                 <p className="font-semibold text-primary">
                                     {formatNumber(item?.ticketPrice / 100, event?.currency as any)}
                                 </p>
