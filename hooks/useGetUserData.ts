@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import httpService from "@/utils/httpService";
 import { toast } from "@heroui/react";
@@ -57,6 +57,36 @@ export const useEventByUserId = () => {
       return res
     },
     enabled: !!id,
+  });
+
+  useEffect(() => {
+    if (query.error) {
+      const err: any = query.error;
+      toast.danger(err?.response?.data);
+    }
+  }, [query.error]);
+
+  return query;
+}; 
+
+/**
+ * ===============================
+ * 1. GET CHAT DATA (BY PARAM ID)
+ * ===============================
+ */
+export const useConversationMessageData = () => {
+
+  const searchParams = useSearchParams(); 
+
+  const chatId = searchParams.get("id");
+
+  const query = useQuery({
+    queryKey: ["Conversation-Message", chatId],
+    queryFn: async () => {
+      const res = await httpService.get(`/conversations/${chatId}/messages`);
+      return res.data?.messages?.data
+    },
+    enabled: !!chatId,
   });
 
   useEffect(() => {

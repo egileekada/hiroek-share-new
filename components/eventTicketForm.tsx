@@ -858,6 +858,7 @@ export default function EventTicketForm({
         forgotMutation,
         formikForgotPassword,
         paymentUrl,
+        discountCode,
         user,
         userDataMutation,
     } = useAuth();
@@ -894,10 +895,10 @@ export default function EventTicketForm({
 
             return prev;
         });
-    };
+    }; 
 
     const handleSubmit = () => {
-        const ticketData = { eventId: event?._id, ticketTypes: payload };
+        const ticketData = discountCode?.data?.data?.code ? { eventId: event?._id, ticketTypes: payload, discountCode: discountCode?.data?.data?.code} : { eventId: event?._id, ticketTypes: payload };
         if (event?.ticketing[0]?.ticketPrice > 0) {
             payForTicket.mutate(ticketData);
         } else {
@@ -972,6 +973,13 @@ export default function EventTicketForm({
         event,
     };
 
+    const handleDiscount = ( code: string, amount: string ) => {
+        discountCode.mutate({
+            code: code,
+            amount: amount
+        })
+    }
+
     return (
         <div className=" text-foreground " >
             {tab === 0 && (
@@ -1015,6 +1023,10 @@ export default function EventTicketForm({
                 <TicketSelectionTab
                     {...sharedPaymentProps}
                     {...sharedPricingProps}
+                    handleDiscount={handleDiscount}
+                    user={user}
+                    discountData={discountCode.data}
+                    isLoading={discountCode.isPending}
                     getTicketCount={getTicketCount}
                     updateTicket={updateTicket}
                     handlePreview={handlePreview}

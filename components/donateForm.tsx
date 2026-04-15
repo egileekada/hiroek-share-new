@@ -38,28 +38,28 @@ export default function DonateForm({ setOpen } : { setOpen?: any }) {
                             <input 
                                 onChange={(e) =>  setPayload({ ...payload, firstName: e.target.value })}
                                 type="text"
-                                className=" w-full h-[50px] rounded-md border !font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
+                                className=" w-full h-[50px] rounded-md border font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
                         </div>
                         <div className=" w-full flex flex-col  gap-2 " >
                             <p className=" text-primary text-xs font-medium " >Last Name</p>
                             <input 
                                 onChange={(e) =>  setPayload({ ...payload, lastName: e.target.value })}
                                 type="text"
-                                className=" w-full h-[50px] rounded-md border !font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
+                                className=" w-full h-[50px] rounded-md border font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
                         </div>
                         <div className=" w-full flex flex-col  gap-2 " >
                             <p className=" text-primary text-xs font-medium " >Email Address</p>
                             <input 
                                 onChange={(e) =>  setPayload({ ...payload, email: e.target.value })}
                                 type="email"
-                                className=" w-full h-[50px] rounded-md border !font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
+                                className=" w-full h-[50px] rounded-md border font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
                         </div>
                         <div className=" w-full flex flex-col  gap-2 " >
                             <p className=" text-primary text-xs font-medium " >Phone Number</p>
                             <input 
                                 type="tel"
                                 onChange={(e) =>  setPayload({ ...payload, phone: e.target.value })}
-                                className=" w-full h-[50px] rounded-md border !font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
+                                className=" w-full h-[50px] rounded-md border font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
                         </div>
                         <div className=" w-full flex flex-col  gap-2 mb-6 " >
                             <p className=" text-primary text-xs font-medium " >Donation Amount</p>
@@ -75,7 +75,7 @@ export default function DonateForm({ setOpen } : { setOpen?: any }) {
                                         e.preventDefault();
                                     }
                                 }} 
-                                className=" w-full h-[50px] rounded-md border !font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
+                                className=" w-full h-[50px] rounded-md border font-sm text-primary border-[#37137F14] px-3 bg-[#37137F0D] " />
                         </div>
                         <CustomButton onClick={handleSubmit} rounded="44px" width="100%" height="50px"  >Donate {payload?.amount ? formatNumber(payload?.amount) : "£0.00"}</CustomButton>
                     </div>

@@ -170,7 +170,7 @@ export default function PolicyPage() {
                                 </div>
                             </div>
                             <div className=" w-full col-span-12 text-foreground rounded-lg font-bold flex justify-between bg-[#37137F1A] p-2 ">
-                                <p>Ticket Prize</p>
+                                <p>Ticket Price</p>
                                 <p className=" text-right ">$7</p>
                             </div>
                         </div>

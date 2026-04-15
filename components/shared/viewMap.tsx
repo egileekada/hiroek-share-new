@@ -58,18 +58,18 @@ export default function ViewMap({ lat, lng }: ViewMapProps) {
     if (!isLoaded) return <div>Loading maps...</div>;
 
     return (
-        <div className=" w-full flex flex-col gap-3 items-center " >
-            <LabelText>Location Map</LabelText>
-
-<GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={16}
-            center={location}
-            options={options}
-            onLoad={onMapLoad}
-        >
-            <Marker position={location} />
-        </GoogleMap>
+        <div className=" w-full flex flex-col gap-3 px-4
+         ">
+            <p className=" font-bold text-sm ">Location Map</p>
+            <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={16}
+                center={location}
+                options={options}
+                onLoad={onMapLoad}
+            >
+                <Marker position={location} />
+            </GoogleMap>
         </div>
     );
 }

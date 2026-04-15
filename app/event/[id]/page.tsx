@@ -23,10 +23,13 @@ import { capitalizeFLetter } from "@/utils/capitalLetter";
 import { LabelText } from "@/components/shared";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
+import useChat from "@/hooks/useChat";
 
 function SharePage() {
     const { isLoading, data: event } = useGetEventData();
-    const { data: currencyData } = useCurrencyData();
+    const { data: currencyData } = useCurrencyData(); 
+
+    const { createConversation } = useChat();
 
     const router = useRouter();
     console.log(event);
@@ -192,7 +195,7 @@ function SharePage() {
                         </button>
                         <button
                             onClick={() => router.push(`/policy/${event?._id}`)}
-                            className=" text-sm font-medium text-primary "
+                            className=" text-sm font-semibold text-primary "
                         >
                             policy
                         </button>
@@ -292,6 +295,11 @@ function SharePage() {
                         icon={<HiChatBubbleBottomCenterText />}
                         height="40px"
                         rounded="999px"
+                        onClick={()=> createConversation({
+                            userTwo: event?.admin?._id+"",
+                            userType: event?.adminType + "",
+                            userTwoEvent: event?._id + ""
+                        })}
                     >
                         Message Event Host
                     </CustomButton>

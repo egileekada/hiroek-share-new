@@ -25,7 +25,6 @@ const useAuth = (community?: ICommunity) => {
     console.log(id);
 
     console.log(slug?.replace("%40", "@"));
-    
 
     const [email, setEmail] = useState("");
 
@@ -66,15 +65,14 @@ const useAuth = (community?: ICommunity) => {
                 window.close();
             }, 3000);
         },
-    }); 
-
+    });
 
     const loginMutation = useMutation({
         mutationFn: (data: any) =>
             unsecureHttpService.post(`/auth/email-signin`, data),
         onError: (error: any) => {
             console.log("test");
-            
+
             toast.danger(error?.response?.data?.error?.details?.message);
         },
         onSuccess: (data: any) => {
@@ -94,7 +92,6 @@ const useAuth = (community?: ICommunity) => {
     });
 
     console.log(loginMutation?.isSuccess);
-    
 
     const forgotMutation = useMutation({
         mutationFn: (data: any) =>
@@ -141,6 +138,17 @@ const useAuth = (community?: ICommunity) => {
             } else {
                 toast.danger("Payment URL not found.");
             }
+        },
+    });
+
+    const discountCode = useMutation({
+        mutationFn: (data: { code: string; amount: string }) =>
+            httpService.post(`/events/verify-discount-code/${id}`, data),
+        onError: (error: any) => {
+            toast.danger(error?.response?.data?.error?.details?.message); 
+        },
+        onSuccess: (data) => {
+            console.log(data);
         },
     });
 
@@ -258,7 +266,9 @@ const useAuth = (community?: ICommunity) => {
         password: string;
     }>({
         initialValues: {
-            email: slug?.replace("%40", "@") ?? emailData?.replace("%40", "@") + "",
+            email:
+                slug?.replace("%40", "@") ??
+                emailData?.replace("%40", "@") + "",
             resetCode: id ?? resetCode + "",
             password: "",
         },
@@ -304,7 +314,13 @@ const useAuth = (community?: ICommunity) => {
         },
     });
 
-    const isLoading = verifyMutation?.isPaused || signupMutation?.isPaused || loginMutation?.isPaused || resetPasswordMutation?.isPaused || payForTicket?.isPaused || payForTicketFree?.isPaused 
+    const isLoading =
+        verifyMutation?.isPaused ||
+        signupMutation?.isPaused ||
+        loginMutation?.isPaused ||
+        resetPasswordMutation?.isPaused ||
+        payForTicket?.isPaused ||
+        payForTicketFree?.isPaused;
 
     return {
         formik,
@@ -333,6 +349,7 @@ const useAuth = (community?: ICommunity) => {
         formikResetPassword,
         user,
         userDataMutation,
+        discountCode
     };
 };
 

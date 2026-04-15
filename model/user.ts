@@ -94,3 +94,30 @@ export interface IMember {
     "fullname": string,
     "photo": string
 } 
+
+export interface IChatdetail {
+    "senderType": string,
+    "recipientType": string,
+    "status": string,
+    "_id": string,
+    "conversation": string,
+    "message": string,
+    "sender": {
+        "fcm_tokens": string,
+        "_id": string,
+        "fullname": string,
+        "email": string,
+        "createdAt": string
+    },
+    "recipient": {
+        "_id": string,
+        "name": string,
+        "address": string,
+        "email": string,
+        "bio": string,
+        "logo": string,
+        "createdAt": string
+    },
+    "createdAt": string,
+    "updatedAt": string, 
+}

@@ -3,6 +3,7 @@ import CustomButton from "../shared/customButton";
 import { formatNumber } from "../../utils/numberFormat";
 import { textLimit } from "../../utils/textlimit";
 import type { IEvent } from "../../model/event";
+import { IUserDetail } from "@/model/user";
 
 export default function TicketPreviewTab({
     event,
@@ -17,7 +18,7 @@ export default function TicketPreviewTab({
     setTab,
 }: {
     event: IEvent;
-    user: any;
+    user: IUserDetail;
     totalPrices: number;
     serviceFees: number;
     totalTickets: number;
@@ -72,6 +73,17 @@ export default function TicketPreviewTab({
                 </div>
             </div>
 
+            {user?.fullname && (
+                    <div className=" w-full py-4 flex flex-col items-center text-center gap-2  ">
+                        <p className=" font-bold text-foreground ">
+                            Signed In As
+                        </p>
+                        <div className=" flex flex-col text-black ">
+                            <p className=" font-semibold ">{user?.fullname}</p>
+                            <p className=" font-semibold ">{user?.phone}</p>
+                        </div>
+                    </div>
+                )}
             <div className="w-full flex items-center border-t justify-between border-[#E8E8E8]">
                 <CustomButton
                     loading={payForTicket?.isLoading || payForTicketFree?.isLoading}
