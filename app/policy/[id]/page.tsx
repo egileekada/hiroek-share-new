@@ -6,21 +6,24 @@ import useGetEventData from "@/hooks/useGetEventData";
 import { useEventByUserId } from "@/hooks/useGetUserData";
 import { formatNumber } from "@/utils/numberFormat";
 import { textLimit } from "@/utils/textlimit";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoChevronBack } from "react-icons/io5";
 
 export default function PolicyPage() {
-    const { isLoading, data: event } = useGetEventData();
+    const { data: event } = useGetEventData();
 
     const  { data } = useEventByUserId()
 
     console.log(data);
     
 
-    const [isOpen, setIsOpen] = useState(true);
-    const [tab, setTab] = useState(1);
+    const [isOpen, setIsOpen] = useState(false);
+    const [tab, setTab] = useState(0);
     const userId = localStorage.getItem("userId");
     const { user, userDataMutation } = useAuth();
+
+    const router = useRouter()
 
     // Fetch user data on mount if userId exists
     useEffect(() => {
@@ -67,7 +70,7 @@ export default function PolicyPage() {
     return (
         <div className=" w-full flex flex-col h-screen p-4 gap-10">
             <div className=" flex  ">
-                <button className=" w-11 h-11 bg-foreground flex justify-center items-center rounded-2xl text-white ">
+                <button onClick={()=> router.back()} className=" w-11 h-11 bg-foreground flex justify-center items-center rounded-2xl text-white ">
                     <IoChevronBack />
                 </button>
             </div>
@@ -102,7 +105,7 @@ export default function PolicyPage() {
                             refund?
                         </p>
                         <div className=" w-full font-bold flex justify-around items-center ">
-                            <button className=" text-[#23B33A] ">Yes</button>
+                            <button onClick={()=> setTab(1)} className=" text-[#23B33A] ">Yes</button>
                             <button
                                 onClick={() => setIsOpen(false)}
                                 className=" text-[#EE3124] "

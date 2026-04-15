@@ -8,7 +8,7 @@ export default function LabelText(
     }
 ) {
     return(
-        <div className=" w-fit h-[35px] rounded-xl bg-[#37137F26] flex justify-center items-center px-4 " >
+        <div className=" w-fit h-[35px] mx-auto rounded-xl bg-[#37137F26] flex justify-center items-center px-4 " >
             <p className=" text-sm font-extrabold " >{children}</p>
         </div>
     )

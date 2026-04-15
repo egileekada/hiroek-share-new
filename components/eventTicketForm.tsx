@@ -210,7 +210,7 @@ export default function EventTicketForm({
                 </div>
             )}
 
-            {tab === 2 && (
+            {tab === 4 && (
                 <TicketSelectionTab
                     {...sharedPaymentProps}
                     {...sharedPricingProps}
@@ -236,7 +236,7 @@ export default function EventTicketForm({
                 />
             )}
 
-            {tab === 4 && (
+            {tab === 2 && (
                 <SuccessTab event={event} setTab={setTab} />
             )}
 

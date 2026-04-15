@@ -53,11 +53,11 @@ function SharePage() {
 
     return (
         <LoadingAnimation loading={isLoading}>
-            <div className=" w-full lg:h-screen relative flex lg:flex-row flex-col pb-32 gap-6 text-primary ">
+            <div className=" w-full lg:h-screen relative flex lg:flex-row flex-col pb-22 gap-6 text-primary ">
                 <div className=" w-full h-fit flex flex-col gap-4 lg:rounded-[44px] lg:p-8 ">
                     {/* Image */}
 
-                    <div className=" w-full lg:h-[300px] h-[300px] relative ">
+                    <div onClick={() => handleShowType("event")} className=" w-full lg:h-[300px] h-[300px] relative ">
                         <CustomImage
                             src={event?.photo + ""}
                             alt="photo"
@@ -267,8 +267,7 @@ function SharePage() {
             >
                 <div className=" pb-3 px-4 flex flex-col gap-4 ">
                     <div className=" w-full flex items-center gap-3 px-2 bg-[#A73A7A66] bg-opacity-30 rounded-[20px] py-3 ">
-                        <div
-                            onClick={() => handleShowType("host")}
+                        <div 
                             className=" w-[44px] h-[44px] rounded-full "
                         >
                             <img
