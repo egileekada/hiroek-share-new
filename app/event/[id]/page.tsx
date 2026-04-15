@@ -108,7 +108,7 @@ function SharePage() {
                                     </div>
                                 </div>
                                 <div className=" w-full ">
-                                    <CustomButton
+                                    {/* <CustomButton
                                         onClick={() => setOpenTicket(true)}
                                         bgColor="#ffffff"
                                         rounded="44px"
@@ -117,7 +117,7 @@ function SharePage() {
                                         color="#37137f"
                                     >
                                         Join Event
-                                    </CustomButton>
+                                    </CustomButton> */}
                                 </div>
                             </div>
                             <EventHeader
@@ -197,7 +197,7 @@ function SharePage() {
                             onClick={() => router.push(`/policy/${event?._id}`)}
                             className=" text-sm font-semibold text-primary "
                         >
-                            policy
+                            Policy
                         </button>
                     </div>
                 </div>

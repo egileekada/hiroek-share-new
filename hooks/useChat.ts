@@ -113,7 +113,7 @@ const useChat = () => {
         }) => httpService.post(`/conversations/${id}/messages`, data),
 
         onSuccess: () => {
-            setInputMessage("");
+            formik.resetForm()
         },
 
         onError: (error: any) => {

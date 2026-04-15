@@ -866,6 +866,7 @@ export default function EventTicketForm({
     const [payload, setPayload] = useState<TicketPayload[]>([]);
     const [totalPrices, setTotalPrices] = useState(0);
     const [serviceFees, setServiceFees] = useState(0);
+    const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("access_token");
@@ -953,7 +954,7 @@ export default function EventTicketForm({
     useEffect(() => {
         if (!userId) return;
 
-        const socket = io("https://staging.hiroek.io", { auth: { token } });
+        const socket = io(BASE_URL?.replace("/api", ""), { auth: { token } });
         socket.on(`ticket-payment-${userId}`, () => setTab(4));
 
         return () => {
@@ -1019,7 +1020,7 @@ export default function EventTicketForm({
                 </div>
             )}
 
-            {tab === 2 && (
+            {tab === 4 && (
                 <TicketSelectionTab
                     {...sharedPaymentProps}
                     {...sharedPricingProps}
@@ -1037,6 +1038,7 @@ export default function EventTicketForm({
                 <TicketPreviewTab
                     {...sharedPaymentProps}
                     {...sharedPricingProps}
+                    discountData={discountCode.data}
                     user={user}
                     totalTickets={totalTickets}
                     handleSubmit={handleSubmit}
@@ -1044,7 +1046,7 @@ export default function EventTicketForm({
                 />
             )}
 
-            {tab === 4 && (
+            {tab === 2 && (
                 <SuccessTab event={event} setTab={setTab} />
             )}
 

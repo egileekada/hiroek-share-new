@@ -58,8 +58,7 @@ export default function ViewMap({ lat, lng }: ViewMapProps) {
     if (!isLoaded) return <div>Loading maps...</div>;
 
     return (
-        <div className=" w-full flex flex-col gap-3 px-4
-         ">
+        <div className=" w-full flex flex-col px-4 ">
             <p className=" font-bold text-sm ">Location Map</p>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}

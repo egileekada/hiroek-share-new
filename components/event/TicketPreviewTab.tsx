@@ -4,6 +4,7 @@ import { formatNumber } from "../../utils/numberFormat";
 import { textLimit } from "../../utils/textlimit";
 import type { IEvent } from "../../model/event";
 import { IUserDetail } from "@/model/user";
+import { useState, useEffect } from "react";
 
 export default function TicketPreviewTab({
     event,
@@ -16,6 +17,7 @@ export default function TicketPreviewTab({
     payForTicketFree,
     handleSubmit,
     setTab,
+    discountData
 }: {
     event: IEvent;
     user: IUserDetail;
@@ -27,67 +29,128 @@ export default function TicketPreviewTab({
     payForTicketFree: any;
     handleSubmit: () => void;
     setTab: (tab: number) => void;
+    discountData: any;
 }) {
+    const [discountPerctage, setDiscountPerctage] = useState(0);
+    const [discountPrice, setDiscountPrice] = useState(0);
+
+    useEffect(() => {
+        if (discountData?.data?.discount) {
+            const perct =
+                (discountData?.data?.discount / 100 / totalPrices) * 100;
+            setDiscountPerctage(perct);
+            setDiscountPrice(discountData?.data?.discount / 100);
+        }
+    }, [discountData?.data?.discount]);
+    
     return (
         <div className="w-full flex flex-col gap-4 text-pr items-center">
             <div className="pb-2 w-full flex gap-2 justify-center items-center relative border-b border-[#E8E8E8]">
                 <button className=" absolute left-0 " onClick={() => setTab(2)}>
                     <IoChevronBack size="20px" />
                 </button>
-                <p className="text-xl font-black text-primary">Ticket Purchase Preview</p>
+                <p className="text-xl font-black text-primary">
+                    Ticket Purchase Preview
+                </p>
             </div>
 
             <div className="w-full flex flex-col px-3 gap-3 text-sm">
                 <div className="w-full flex justify-between gap-4">
                     <p className="font-semibold">Full Name</p>
-                    <p className=" font-medium " >{textLimit(user?.fullname, 30)}</p>
+                    <p className=" font-medium ">
+                        {textLimit(user?.fullname, 30)}
+                    </p>
                 </div>
                 <div className="w-full flex justify-between gap-4">
                     <p className="font-semibold">Email</p>
-                    <p className=" font-medium " >{textLimit(user?.email, 30)}</p>
+                    <p className=" font-medium ">
+                        {textLimit(user?.email, 30)}
+                    </p>
                 </div>
                 <div className="w-full flex justify-between gap-4">
                     <p className="font-semibold">Phone Number</p>
-                    <p className=" font-medium " >{user?.phone}</p>
+                    <p className=" font-medium ">{user?.phone}</p>
                 </div>
                 <div className="w-full flex justify-between gap-4">
                     <p className="font-semibold">Event Name</p>
-                    <p className=" font-medium " >{textLimit(event?.name, 30)}</p>
+                    <p className=" font-medium ">
+                        {textLimit(event?.name, 30)}
+                    </p>
                 </div>
                 <div className="w-full flex justify-between gap-4">
                     <p className="font-semibold">Number of Ticket</p>
-                    <p className=" font-medium " >{formatNumber(totalTickets)}</p>
+                    <p className=" font-medium ">
+                        {formatNumber(totalTickets)}
+                    </p>
                 </div>
             </div>
 
             <div className="w-full p-4 bg-[#37137F1A] rounded-2xl flex flex-col">
                 <div className="grid grid-cols-2 text-primary gap-3 w-full mt-1">
                     <p className="text-sm font-bold">Ticket Price</p>
-                    <p className="font-black text-right">{formatNumber(totalPrices, event?.currency as any)}</p>
+                    <p className="font-black text-right">
+                        {formatNumber(totalPrices, event?.currency as any)}
+                    </p>
+                    <p
+                        className={` ${discountPrice > 0 ? "" : "hidden"} text-sm font-bold `}
+                    >
+                        Discount(%)
+                    </p>
+                    <p
+                        className={` ${discountPrice > 0 ? "" : "hidden"} font-black text-right `}
+                    >
+                        {formatNumber(discountPerctage)}
+                    </p>
+                    <p
+                        className={` ${discountPrice > 0 ? "" : "hidden"} text-sm font-bold `}
+                    >
+                        Discount Prize
+                    </p>
+                    <p
+                        className={` ${discountPrice > 0 ? "" : "hidden"} font-black text-right `}
+                    >
+                        {formatNumber(discountPrice, event?.currency as any)}
+                    </p>
                     <p className="text-sm font-bold">Service Fee</p>
-                    <p className="font-black text-right">{formatNumber(totalPrices > 0 ? serviceFees : 0, event?.currency as any)}</p>
+                    <p className="font-black text-right">
+                        {formatNumber(
+                            totalPrices > 0 ? serviceFees : 0,
+                            event?.currency as any,
+                        )}
+                    </p>
                     <p className="text-sm font-bold">Total</p>
                     <p className="font-black text-right">
-                        {formatNumber(totalPrices > 0 ? totalPrices + serviceFees : totalPrices, event?.currency as any)}
+                            {formatNumber(
+                                discountPrice > 0
+                                    ? discountPrice + serviceFees
+                                    : totalPrices > 0
+                                      ? totalPrices + serviceFees
+                                      : totalPrices,
+                                event?.currency as any,
+                            )}
                     </p>
                 </div>
             </div>
 
             {user?.fullname && (
-                    <div className=" w-full py-4 flex flex-col items-center text-center gap-2  ">
-                        <p className=" font-bold text-foreground ">
-                            Signed In As
-                        </p>
-                        <div className=" flex flex-col text-black ">
-                            <p className=" font-semibold ">{user?.fullname}</p>
-                            <p className=" font-semibold ">{user?.phone}</p>
-                        </div>
+                <div className=" w-full py-4 flex flex-col items-center text-center gap-2  ">
+                    <p className=" font-bold text-foreground ">Signed In As</p>
+                    <div className=" flex flex-col text-black ">
+                        <p className=" font-semibold ">{user?.fullname}</p>
+                        <p className=" font-semibold ">{user?.phone}</p>
                     </div>
-                )}
+                </div>
+            )}
             <div className="w-full flex items-center border-t justify-between border-[#E8E8E8]">
                 <CustomButton
-                    loading={payForTicket?.isLoading || payForTicketFree?.isLoading}
-                    isDisabled={payload.length === 0 || payForTicket?.isLoading || payForTicketFree?.isLoading}
+                    loading={
+                        payForTicket?.isLoading || payForTicketFree?.isLoading
+                    }
+                    isDisabled={
+                        payload.length === 0 ||
+                        payForTicket?.isLoading ||
+                        payForTicketFree?.isLoading
+                    }
                     onClick={handleSubmit}
                     rounded="44px"
                     height="50px"

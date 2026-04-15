@@ -16,7 +16,9 @@ export default function EventHeader({ event, totalTickets }: any) {
 
     return (
         <div className="w-full p-4 bg-white rounded-xl font-medium shadow flex flex-col gap-2">
-            <p className="font-bold text-lg text-primary capitalize ">{event?.name}</p>
+            <p className="font-bold text-lg text-primary capitalize ">
+                {event?.name}
+            </p>
 
             <div className="flex gap-2 items-center mt-2 ">
                 <LocationIcon block={true} />
@@ -25,11 +27,15 @@ export default function EventHeader({ event, totalTickets }: any) {
                 </p>
             </div>
 
-            <div className="flex gap-2 items-center">
-                <CalendarIcon2 />
-                <p className="text-sm">{dateFormat(event?.endTime)}</p>
-                <ClockIcon />
-                <p className="text-sm">{timeFormat(event?.endTime)}</p>
+            <div className="flex justify-between items-center">
+                <div className=" flex items-center gap-2">
+                    <CalendarIcon2 />
+                    <p className="text-sm">{dateFormat(event?.endTime)}</p>
+                </div>
+                <div className=" flex items-center pr-2 gap-2">
+                    <ClockIcon />
+                    <p className="text-sm">{timeFormat(event?.endTime)}</p>
+                </div>
             </div>
 
             {event?.ticketing?.length > 0 && (

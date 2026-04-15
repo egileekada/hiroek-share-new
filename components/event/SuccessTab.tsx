@@ -10,7 +10,7 @@ export function SuccessTab({
     setTab: (tab: number) => void;
 }) {
     return (
-        <div className="w-full h-[75vh] flex flex-col items-center">
+        <div className="w-full h-[80vh] flex flex-col items-center">
             <div className="flex flex-col gap-1 items-center px-3 text-center">
                 <p className="text-xl font-black text-[#37137F]">{`Congratulations, You're In!`}</p>
                 <p className="text-sm font-medium text-primary30">
