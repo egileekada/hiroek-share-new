@@ -13,6 +13,7 @@ interface ModalLayoutProps {
     height?: string;
     rounded?: string;
     hideCloseIcon?: boolean;
+    placement?: "auto" | "top" | "center" | "bottom"
 }
 
 export default function ModalLayout({
@@ -24,11 +25,12 @@ export default function ModalLayout({
     height = "auto",
     rounded = "16px",
     hideCloseIcon = false,
+    placement
 }: ModalLayoutProps) {
     return (
         <Modal isOpen={open} onOpenChange={setOpen}>
             <Modal.Backdrop>
-                <Modal.Container className=" p-0! m-0! w-full! " >
+                <Modal.Container placement={placement} className=" p-0! m-0! w-full! " >
                     <Modal.Dialog
                         className="bg-white relative"
                         // style={{

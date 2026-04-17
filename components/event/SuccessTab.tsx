@@ -33,7 +33,7 @@ export function SuccessTab({
             {/* <div className="w-full flex-col mt-auto pb-4 flex "> */}
                 <div className=" w-full flex flex-col gap-3 ">
                     <p className=" text-sm font-medium ">
-                        Use the Hiroek app Everything you need for your event,
+                        Use the Hiroek app <br/> Everything you need for your event,
                         in one place.
                     </p>
                     <div className=" list-disc text-xs flex flex-col gap-1 ">

@@ -24,10 +24,11 @@ import { LabelText } from "@/components/shared";
 import { HiChatBubbleBottomCenterText } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import useChat from "@/hooks/useChat";
+import { Metadata } from "next";
 
 function SharePage() {
     const { isLoading, data: event } = useGetEventData();
-    const { data: currencyData } = useCurrencyData(); 
+    const { data: currencyData } = useCurrencyData();
 
     const { createConversation } = useChat();
 
@@ -57,7 +58,10 @@ function SharePage() {
                 <div className=" w-full h-fit flex flex-col gap-4 lg:rounded-[44px] lg:p-8 ">
                     {/* Image */}
 
-                    <div onClick={() => handleShowType("event")} className=" w-full lg:h-[300px] h-[300px] relative ">
+                    <div
+                        onClick={() => handleShowType("event")}
+                        className=" w-full lg:h-[300px] h-[300px] relative "
+                    >
                         <CustomImage
                             src={event?.photo + ""}
                             alt="photo"
@@ -200,16 +204,27 @@ function SharePage() {
                             Policy
                         </button>
                     </div>
+                    <div className=" lg:flex hidden mt-4 w-full ">
+                        {/* Bottom CTA */}
+                        <BottomCTA
+                            event={event as IEvent}
+                            onJoin={() => setOpenTicket(true)}
+                            onDonate={() => setOpenDonate(true)}
+                            setShowHost={() => setShowHost(true)}
+                        />
+                    </div>
                 </div>
             </div>
 
-            {/* Bottom CTA */}
-            <BottomCTA
-                event={event as IEvent}
-                onJoin={() => setOpenTicket(true)}
-                onDonate={() => setOpenDonate(true)}
-                setShowHost={() => setShowHost(true)}
-            />
+            <div className=" lg:hidden w-full ">
+                {/* Bottom CTA */}
+                <BottomCTA
+                    event={event as IEvent}
+                    onJoin={() => setOpenTicket(true)}
+                    onDonate={() => setOpenDonate(true)}
+                    setShowHost={() => setShowHost(true)}
+                />
+            </div>
 
             {/* Modals */}
             <ModalLayout open={openDonate} setOpen={setOpenDonate}>
@@ -224,6 +239,7 @@ function SharePage() {
             </ModalLayout>
 
             <ModalLayout
+                placement="center"
                 width=" lg:max-w-[500px] max-w-full w-full "
                 rounded="24px"
                 open={showPartner}
@@ -260,16 +276,15 @@ function SharePage() {
             </ModalLayout>
 
             <ModalLayout
+                placement="center"
                 width=" max-w-[400px] "
                 rounded="24px"
                 open={showHost}
                 setOpen={setShowHost}
             >
                 <div className=" pb-3 px-4 flex flex-col gap-4 ">
-                    <div className=" w-full flex items-center gap-3 px-2 bg-[#A73A7A66] bg-opacity-30 rounded-[20px] py-3 ">
-                        <div 
-                            className=" w-[44px] h-[44px] rounded-full "
-                        >
+                    <button onClick={()=> router.push(`/user/${event?.admin?._id}`)} className=" w-full flex items-center gap-3 px-2 bg-[#A73A7A66] bg-opacity-30 rounded-[20px] py-3 ">
+                        <div className=" w-[44px] h-[44px] rounded-full ">
                             <img
                                 className=" w-full h-full rounded-full object-cover "
                                 src={
@@ -288,17 +303,19 @@ function SharePage() {
                                 {event?.admin?.fullname ?? event?.admin?.name}
                             </p>
                         </div>
-                    </div>
+                    </button>
                     <CustomButton
                         hasFrontIcon
                         icon={<HiChatBubbleBottomCenterText />}
                         height="40px"
                         rounded="999px"
-                        onClick={()=> createConversation({
-                            userTwo: event?.admin?._id+"",
-                            userType: event?.adminType + "",
-                            userTwoEvent: event?._id + ""
-                        })}
+                        onClick={() =>
+                            createConversation({
+                                userTwo: event?.admin?._id + "",
+                                userType: event?.adminType + "",
+                                userTwoEvent: event?._id + "",
+                            })
+                        }
                     >
                         Message Event Host
                     </CustomButton>
@@ -312,6 +329,7 @@ function SharePage() {
                 </div>
             </ModalLayout>
             <ModalLayout
+                placement="center"
                 width=" max-w-[400px] "
                 rounded="24px"
                 open={showImg}
