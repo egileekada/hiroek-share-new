@@ -36,6 +36,7 @@ export default function TicketSelectionTab({
     isLoading: boolean;
     discountData: any;
 }) {
+
     const [code, setCode] = useState("");
     const [discountPerctage, setDiscountPerctage] = useState(0);
     const [discountPrice, setDiscountPrice] = useState(0);
@@ -181,7 +182,7 @@ export default function TicketSelectionTab({
                             <CustomButton
                                 loading={isLoading}
                                 onClick={() =>
-                                    handleDiscount(code, totalPrices + "")
+                                    handleDiscount(code, (totalPrices * 100) + "")
                                 }
                                 isDisabled={code ? false : true}
                                 fontSize="12px"

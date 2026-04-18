@@ -11,6 +11,7 @@ import useGetCommunityById from "@/hooks/useGetCommunityById";
 import { formatNumberWithK } from "@/utils/formatNumberWithK";
 import { textLimit } from "@/utils/textlimit";
 import { useState } from "react";
+import { Avatar } from "@heroui/react";
 
 export default function ChannelsPage() {
     const { data: item, isLoading } = useGetCommunityById();
@@ -20,7 +21,7 @@ export default function ChannelsPage() {
     // const { joinChannel, open, setOpen, tab, setTab, setShow, show } =
     //     useAuth();
 
-    const isMember = item?.members?.some((m) => m?._id === user?._id); 
+    const isMember = item?.members?.some((m) => m?._id === user?._id);
 
     const handleViewApp = () => {
         setOpen(true);
@@ -30,10 +31,10 @@ export default function ChannelsPage() {
 
     return (
         <LoadingAnimation loading={isLoading}>
-            <div className="w-full h-full p-4 flex flex-col items-center gap-6">
-                <div className="w-full max-w-[500px] flex flex-col items-center gap-3">
+            <div className="w-full h-full flex flex-col items-center gap-6">
+                <div className="w-full max-w-[600px] flex flex-col items-center gap-3">
                     {/* HERO CARD */}
-                    <div className="relative w-full h-[240px] rounded-2xl overflow-hidden shadow-md">
+                    <div className="relative w-full h-[240px] rounded-b-2xl overflow-hidden shadow-md">
                         {item?.photo && (
                             <Image
                                 src={item.photo}
@@ -43,58 +44,67 @@ export default function ChannelsPage() {
                                 priority
                             />
                         )}
-
-                        <div className="absolute bottom-10 rounded-3xl inset-x-5 p-4 bg-[#37137FE5] text-white flex flex-col items-center gap-2">
-                            <p className="font-black text-lg text-center uppercase ">
-                                {textLimit(item?.name ?? "", 30)}
-                            </p>
-
-                            {/* MEMBERS */}
-                            {item?.members && item.members.length > 0 && (
-                                <div className="flex items-center bg-[#FFFFFF4D] px-3 h-[44px] rounded-full">
-                                    <div className="flex -space-x-2">
-                                        {item.members
-                                            .slice(0, 3)
-                                            .map((member) => (
-                                                <div
-                                                    key={member._id}
-                                                    className="relative w-7 h-7 rounded-full border-2 border-white overflow-hidden"
-                                                >
-                                                    <Image
-                                                        src={member.photo}
-                                                        alt="member"
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                            ))}
-                                    </div>
-
-                                    <span className="ml-2 text-xs font-semibold text-white">
-                                        {formatNumberWithK(item.members.length)}{" "}
-                                        Members
-                                    </span>
-                                </div>
-                            )}
-                        </div>
                     </div>
-                    <p className=" text-xs font-semibold ">
-                        Request To Join channel to gain access!
-                    </p>
+
+                    <div className=" w-full p-4 border-b text-foreground flex flex-col items-center gap-2">
+                        <p className="font-black text-lg text-center uppercase ">
+                            {textLimit(item?.name ?? "", 30)}
+                        </p>
+
+                        {/* MEMBERS */}
+                        {item?.members && item.members.length > 0 && (
+                            <div className="flex items-center px-3 h-[44px] rounded-full">
+                                <div className="flex -space-x-2">
+                                    {item.members.slice(0, 3).map((member) => (
+                                        <div
+                                            key={member._id}
+                                            className="relative rounded-full border-2 border-white overflow-hidden"
+                                        >
+                                            <Avatar>
+                                                <Avatar.Image
+                                                    alt={member?.fullname}
+                                                    src={member.photo}
+                                                />
+                                                <Avatar.Fallback>
+                                                    {member?.fullname?.slice(
+                                                        0,
+                                                        2,
+                                                    )}
+                                                </Avatar.Fallback>
+                                            </Avatar>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <span className="ml-2 text-xs font-semibold ">
+                                    {formatNumberWithK(item.members.length)}{" "}
+                                    Members
+                                </span>
+                            </div>
+                        )}
+                    </div>
 
                     {/* ACTION BUTTONS */}
                     {!user?._id && (
-                        <div className=" max-w-[258px] w-full ">
-                            <CustomButton
-                                onClick={() => setOpen(true)}
-                                width="100%"
-                                height="54px"
-                                rounded="999px"
-                            >
-                                Request To Join Channel
-                            </CustomButton>
+                        <div className=" flex justify-center items-center border-b w-full pb-6 pt-4 ">
+                            <div className=" max-w-[300px] w-full ">
+                                <CustomButton
+                                    onClick={() => setOpen(true)}
+                                    width="100%"
+                                    height="54px"
+                                    rounded="999px"
+                                >
+                                    Join Channel
+                                </CustomButton>
+                            </div>
                         </div>
                     )}
+                    
+                    <div className=" flex justify-center items-center border-b w-full pb-6 px-4 pt-4 ">
+                        <p className=" font-medium "  >
+                            {item?.description}
+                        </p>
+                    </div>
 
                     {/* {user?._id && !isMember && (
                         <CustomButton
