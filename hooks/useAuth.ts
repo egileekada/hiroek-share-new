@@ -315,12 +315,12 @@ const useAuth = (community?: ICommunity) => {
     });
 
     const isLoading =
-        verifyMutation?.isPaused ||
-        signupMutation?.isPaused ||
-        loginMutation?.isPaused ||
-        resetPasswordMutation?.isPaused ||
-        payForTicket?.isPaused ||
-        payForTicketFree?.isPaused;
+        verifyMutation?.isPending ||
+        signupMutation?.isPending ||
+        loginMutation?.isPending ||
+        resetPasswordMutation?.isPending ||
+        payForTicket?.isPending ||
+        payForTicketFree?.isPending;
 
     return {
         formik,
